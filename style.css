@@ -1,0 +1,330 @@
+:root {
+    --red-border: #e11d48;
+    --text-dark: #1f2937;
+    --text-blue: #2563eb;
+    --bg-white: #ffffff;
+    --cell-border: #1f2937;
+    --code-bg: #f9fafb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    color: var(--text-dark);
+    padding: 20px;
+}
+
+.page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.main-title {
+    color: #e11d48;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+}
+
+/* Presentation Box (Red Bordered Section) */
+.presentation-box {
+    border: 3px solid var(--red-border);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    position: relative;
+}
+
+.visual-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.mem-addr {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.top-addr {
+    margin-bottom: 10px;
+}
+
+.bottom-addr {
+    margin-top: 10px;
+}
+
+.stack-diagram {
+    width: 140px;
+    border: 2px solid #000;
+    border-top: none;
+    border-bottom: none;
+    position: relative;
+    padding: 0;
+    padding-top: 25px;
+    /* Space for ToP label */
+}
+
+.stack-cells {
+    display: flex;
+    flex-direction: column-reverse;
+    /* Stack grows UP visually but addresses go DOWN */
+}
+
+.stack-cell {
+    height: 35px;
+    width: 100%;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    background: white;
+    margin-bottom: -2px;
+    /* overlap borders */
+}
+
+.stack-cell:last-child {
+    border-top: 2px solid #000;
+}
+
+.label-to-top {
+    position: absolute;
+    left: 10px;
+    /* Inside the red border */
+    top: 0px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.label-to-top span {
+    font-size: 1.2rem;
+    display: inline-block;
+    transform: rotate(90deg);
+    /* Point right to the stack */
+    margin-left: 5px;
+}
+
+.sp-indicator {
+    position: absolute;
+    left: -70px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.bottom-label {
+    position: absolute;
+    left: -70px;
+    bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.growth-caption {
+    color: var(--red-border);
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Code Area */
+.code-area {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.op-title {
+    color: var(--red-border);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+pre {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #2563eb;
+}
+
+.highlight {
+    background: yellow;
+    font-weight: bold;
+}
+
+/* Explanation Area */
+.explanation-area {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.explanation-area p {
+    margin-bottom: 20px;
+}
+
+.interactive-controls {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    width: 100px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-push {
+    background: var(--text-blue);
+    color: white;
+}
+
+.btn-pop {
+    background: #64748b;
+    color: white;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.status {
+    margin-top: 15px;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Assembly Code Section */
+.assembly-section {
+    margin-top: 3rem;
+}
+
+.assembly-code {
+    background-color: #1e293b;
+    color: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    overflow-x: auto;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.assembly-code .comment {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.assembly-code .keyword {
+    color: #f472b6;
+    font-weight: 600;
+}
+
+.assembly-code .register {
+    color: #7dd3fc;
+    font-weight: 500;
+}
+
+.assembly-code .immediate {
+    color: #fbbf24;
+}
+
+.assembly-code .label {
+    color: #a78bfa;
+    font-weight: 500;
+}
+
+.assembly-code .directive {
+    color: #34d399;
+    font-weight: 600;
+}
+
+.code-explanation h4 {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.explanation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.exp-item {
+    padding: 1rem;
+    background: #f8fafc;
+    border-left: 3px solid var(--text-blue);
+    border-radius: 4px;
+}
+
+.exp-item strong {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-blue);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.exp-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #475569;
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .explanation-grid {
+        grid-template-columns: 1fr;
+    }
+}
